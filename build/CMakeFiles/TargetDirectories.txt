@@ -1,0 +1,3 @@
+/Users/ishanchitale/Desktop/VSProjects/Fractalizer/build/CMakeFiles/Fractalizer.dir
+/Users/ishanchitale/Desktop/VSProjects/Fractalizer/build/CMakeFiles/edit_cache.dir
+/Users/ishanchitale/Desktop/VSProjects/Fractalizer/build/CMakeFiles/rebuild_cache.dir
