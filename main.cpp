@@ -13,12 +13,12 @@ using namespace glm;
 int main() {
     std::vector<std::shared_ptr<Hittable>> scene = {
         std::make_shared<Sphere>(vec3(-1,0,4), 0.5),
-        std::make_shared<Cube>(vec3(0,0,3), 0.2)
+        std::make_shared<Sphere>(vec3(1,0,4), 0.5)
     };
 
     Camera cam(vec3(0, 0, 0), 1.0);
-    cam.render_image(scene);
-    cam.output_image();
+    cam.renderImage(scene);
+    cam.outputImage();
 
     return 0;
 }

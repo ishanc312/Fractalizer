@@ -28,40 +28,52 @@ public:
             pixels[i] = new vec3[IMG_WIDTH];
         }
     }
+
     void zoom(float zoom_factor) {
         focal_length = focal_length*zoom_factor;
     }
 
-    void rotate_camera(mat3x3 matrix) {
+    void rotateCamera(mat3x3 matrix) {
         // Placeholder
     }
 
-    vec3 ray_march(vec3 current_pos, const vec3& ray_direction, const std::vector<std::shared_ptr<Hittable>>& scene) {
-        float dist = minSDF(current_pos, scene);
+    vec3 rayMarch(vec3 current_pos, const vec3& ray_direction, const std::vector<std::shared_ptr<Hittable>>& scene) {
+        std::shared_ptr<Hittable> obj = closestObj(current_pos, scene);
+        float dist = obj->SDF(current_pos);
         while (dist >= LOWER_BOUND && dist <= UPPER_BOUND) {
             current_pos = current_pos + ray_direction*dist;
-            dist = minSDF(current_pos, scene);
+            obj = closestObj(current_pos, scene);
+            dist = obj->SDF(current_pos);
         }
-        if (dist < LOWER_BOUND) return vec3(1,0,0);
-        return vec3(0,0,0);
+        if (dist < LOWER_BOUND) {
+            // Return the normal vector so we can color appropriately
+            return obj->getNormal(current_pos);
+        }
+        // Return background color
+        return vec3(1,1,1);
     }
 
-    vec3 write_color(int i, int j, const std::vector<std::shared_ptr<Hittable>>& scene) {
+    vec3 writeColor(int i, int j, const std::vector<std::shared_ptr<Hittable>>& scene) {
         vec3 pixel = pixels_top_left + viewport_u*(float)j + viewport_v*(float)i;
         vec3 ray_direction = (pixel-camera_pos)/distance(camera_pos, pixel);
-        vec3 n_vec = ray_march(camera_pos, ray_direction, scene);
-        return vec3((int)255.999*n_vec.x, (int)255.999*n_vec.y, (int)255.999*n_vec.z);
+        vec3 n_vec = rayMarch(camera_pos, ray_direction, scene);
+        // Perform some conversions to force all components to be in range [0,1]
+        // Transform again to force components to be between 0 and 255 
+        // Now a valid RGB we can write 
+        return vec3((int)255.999*(0.5*(n_vec.x+1.0)), 
+            (int)255.999*(0.5*(n_vec.y+1.0)), 
+            (int)255.999*(0.5*(n_vec.z+1.0)));
     }
 
-    void render_image(const std::vector<std::shared_ptr<Hittable>>& scene) {
+    void renderImage(const std::vector<std::shared_ptr<Hittable>>& scene) {
         for (int i = 0; i < IMG_HEIGHT; i++) {
             for (int j = 0; j < IMG_WIDTH; j++) {
-                pixels[i][j] = write_color(i, j, scene);
+                pixels[i][j] = writeColor(i, j, scene);
             }
         }
     }
 
-    void output_image() {
+    void outputImage() {
         std::cout << "P3\n" << IMG_WIDTH << ' ' << IMG_HEIGHT << "\n255\n";
         for (int i = 0; i < IMG_HEIGHT; i++) {
             for (int j = 0; j < IMG_WIDTH; j++) {
