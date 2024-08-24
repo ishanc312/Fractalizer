@@ -995,4 +995,5 @@ CMakeFiles/Fractalizer.dir/main.cpp.o: \
   /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/vector_relational.hpp \
   /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/integer.hpp \
   /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/detail/func_integer.inl \
+  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/camera.h \
   /Users/ishanchitale/Desktop/VSProjects/Fractalizer/hittable.h

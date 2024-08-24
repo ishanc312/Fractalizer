@@ -848,6 +848,7 @@ CMakeFiles/Fractalizer.dir/main.cpp.o: /Users/ishanchitale/Desktop/VSProjects/Fr
   /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stdarg.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stddef.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stdint.h \
+  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/camera.h \
   /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/detail/setup.hpp \
   /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/detail/type_mat2x2.hpp \
   /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/detail/type_mat2x3.hpp \
@@ -1151,6 +1152,8 @@ CMakeFiles/Fractalizer.dir/main.cpp.o: /Users/ishanchitale/Desktop/VSProjects/Fr
 /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/detail/type_mat2x2.hpp:
 
 /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/detail/setup.hpp:
+
+/Users/ishanchitale/Desktop/VSProjects/Fractalizer/camera.h:
 
 /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stddef.h:
 
