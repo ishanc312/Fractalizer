@@ -1,6 +1,8 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
+#include <iostream>
+#include <random>
 #include "glm/glm.hpp"
 #include "hittable.h"
 using namespace glm;
@@ -14,6 +16,9 @@ const int IMG_HEIGHT = IMG_WIDTH/ASPECT_RATIO;
 
 const float V_WIDTH = 2.0;
 const float V_HEIGHT = V_WIDTH/((float)IMG_WIDTH/IMG_HEIGHT);
+
+const int PIXEL_SAMPLES = 10;
+const float PIXEL_SCALE = 1.0/PIXEL_SAMPLES;
 
 class Camera {
 public:
@@ -37,6 +42,10 @@ public:
         // Placeholder
     }
 
+    float randomFloat() {
+        return std::rand()/(RAND_MAX+1.0);
+    }
+
     vec3 rayMarch(vec3 current_pos, const vec3& ray_direction, const std::vector<std::shared_ptr<Hittable>>& scene) {
         std::shared_ptr<Hittable> obj = closestObj(current_pos, scene);
         float dist = obj->SDF(current_pos);
@@ -46,23 +55,27 @@ public:
             dist = obj->SDF(current_pos);
         }
         if (dist < LOWER_BOUND) {
-            // Return the normal vector so we can color appropriately
             return obj->getNormal(current_pos);
         }
-        // Return background color
+        // White Background Color
         return vec3(1,1,1);
     }
-
-    vec3 writeColor(int i, int j, const std::vector<std::shared_ptr<Hittable>>& scene) {
+    
+    vec3 getColor(float i, float j, const std::vector<std::shared_ptr<Hittable>>& scene) {
         vec3 pixel = pixels_top_left + viewport_u*(float)j + viewport_v*(float)i;
         vec3 ray_direction = (pixel-camera_pos)/distance(camera_pos, pixel);
         vec3 n_vec = rayMarch(camera_pos, ray_direction, scene);
-        // Perform some conversions to force all components to be in range [0,1]
-        // Transform again to force components to be between 0 and 255 
-        // Now a valid RGB we can write 
         return vec3((int)255.999*(0.5*(n_vec.x+1.0)), 
             (int)255.999*(0.5*(n_vec.y+1.0)), 
             (int)255.999*(0.5*(n_vec.z+1.0)));
+    }
+
+    vec3 writeColor(int i, int j, const std::vector<std::shared_ptr<Hittable>>& scene) {
+        vec3 color(0,0,0);
+        for (int k = 0; k < PIXEL_SAMPLES; k++) {
+            color+=getColor(i+randomFloat(), j+randomFloat(), scene);
+        }
+        return color*PIXEL_SCALE;
     }
 
     void renderImage(const std::vector<std::shared_ptr<Hittable>>& scene) {
