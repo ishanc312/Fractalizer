@@ -3,12 +3,26 @@
 
 #include <iostream>
 #include <random>
+#include <thread>
+#include <mutex>
+
+
+// TO-DO:
+// Do we implement a simple ground? 
+// Figure out translation + turning of the camera
+// Play around with shading methods to produce some cool colors
+// Get the space repetition/folding to work to produce more interesting scenes 
+// Parallelize the whole process in CUDA 
+// Possibly a simple GUI (CLI, that is) to allow users to configure scenes more easily (rather than hardcoding)
+// Homogenous Coordinates as to represent translation w/ Matrix Multiplication 
+
 #include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
 #include "hittable.h"
 using namespace glm;
 
 const float LOWER_BOUND = 0.001;
-const float UPPER_BOUND = 1000;
+const float UPPER_BOUND = 100;
 float ASPECT_RATIO = 16.0/9.0;
 
 const int IMG_WIDTH = 1280;
@@ -20,26 +34,42 @@ const float V_HEIGHT = V_WIDTH/((float)IMG_WIDTH/IMG_HEIGHT);
 const int PIXEL_SAMPLES = 10;
 const float PIXEL_SCALE = 1.0/PIXEL_SAMPLES;
 
+const int NUM_THREADS = 128;
+const int BLOCK_HEIGHT = IMG_HEIGHT/NUM_THREADS;
+
 class Camera {
 public:
     Camera(vec3 c_p, float f_l): camera_pos(c_p), focal_length(f_l) {
-        viewport_top_left = vec3(-V_WIDTH/2.0, V_HEIGHT/2.0, focal_length);
-        viewport_u = vec3(V_WIDTH/IMG_WIDTH, 0, 0);
-        viewport_v = vec3(0, -V_HEIGHT/IMG_HEIGHT, 0);
-
-        pixels_top_left = viewport_top_left + viewport_u*0.5f + viewport_v*0.5f;
+        initializeViewport();
         pixels = new vec3*[IMG_HEIGHT];
         for (int i = 0; i < IMG_HEIGHT; i++) {
             pixels[i] = new vec3[IMG_WIDTH];
         }
     }
 
-    void zoom(float zoom_factor) {
-        focal_length = focal_length*zoom_factor;
+    void initializeViewport() {
+        // Default initialization; Camera looks straight ahead 
+        viewport_top_left = camera_pos + vec3(0,0,focal_length) + vec3(-V_WIDTH/2.0, V_HEIGHT/2.0, 0);
+        viewport_u = vec3(V_WIDTH/IMG_WIDTH, 0, 0);
+        viewport_v = vec3(0, -V_HEIGHT/IMG_HEIGHT, 0);
+        pixels_top_left = viewport_top_left + viewport_u*0.5f + viewport_v*0.5f;
     }
 
-    void rotateCamera(mat3x3 matrix) {
-        // Placeholder
+    // void changeZoom(float zoom_factor) {
+    //     focal_length = focal_length*zoom_factor;
+    // }
+
+    // void translatePosition(const vec3& offset) {
+    //     camera_pos = camera_pos+offset;
+    // }
+
+    void turnCamera(float theta, float phi) {
+        mat3 rotationH = mat3(rotate(mat4(1.0f), radians(theta), vec3(0.0f, 1.0f, 0.0f)));
+        mat3 rotationV = mat3(rotate(mat4(1.0f), radians(phi), rotationH*vec3(-1.0f,0.0f,0.0f)));
+        viewport_u = rotationH*viewport_u;
+        viewport_v = rotationV*viewport_v;
+        viewport_top_left = rotationV*rotationH*viewport_top_left;
+        pixels_top_left = rotationV*rotationH*pixels_top_left;
     }
 
     float randomFloat() {
@@ -57,7 +87,6 @@ public:
         if (dist < LOWER_BOUND) {
             return obj->getNormal(current_pos);
         }
-        // White Background Color
         return vec3(1,1,1);
     }
     

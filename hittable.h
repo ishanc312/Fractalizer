@@ -15,9 +15,8 @@ public:
 class Sphere : public Hittable {
 public:
     Sphere(vec3 c, float r): sphere_center(c), sphere_radius(r) {}
-
     float SDF(const vec3& pos) const override {
-        return distance(sphere_center, pos) - sphere_radius;
+        return distance(pos,sphere_center) - sphere_radius;
     }
     vec3 getNormal(const vec3& pos) const override {
         return normalize(pos-sphere_center);

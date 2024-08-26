@@ -863,6 +863,7 @@ CMakeFiles/Fractalizer.dir/main.cpp.o
  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/detail/type_vec2.hpp
  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/detail/type_vec3.hpp
  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/detail/type_vec4.hpp
+ /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/ext/scalar_constants.hpp
  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/ext/scalar_int_sized.hpp
  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/ext/scalar_uint_sized.hpp
  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/ext/vector_int2.hpp
@@ -871,6 +872,11 @@ CMakeFiles/Fractalizer.dir/main.cpp.o
  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/ext/vector_uint2.hpp
  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/ext/vector_uint3.hpp
  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/ext/vector_uint4.hpp
+ /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/geometric.hpp
+ /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/gtc/constants.hpp
+ /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/matrix.hpp
+ /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/trigonometric.hpp
+ /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/ext/matrix_clip_space.inl
  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/ext/matrix_double2x2.hpp
  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/ext/matrix_double2x2_precision.hpp
  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/ext/matrix_double2x3.hpp
@@ -907,6 +913,9 @@ CMakeFiles/Fractalizer.dir/main.cpp.o
  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/ext/matrix_float4x3_precision.hpp
  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/ext/matrix_float4x4.hpp
  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/ext/matrix_float4x4_precision.hpp
+ /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/ext/matrix_projection.inl
+ /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/ext/matrix_transform.inl
+ /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/ext/scalar_constants.inl
  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/ext/vector_bool2.hpp
  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/ext/vector_bool2_precision.hpp
  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/ext/vector_bool3.hpp
@@ -982,6 +991,20 @@ CMakeFiles/Fractalizer.dir/main.cpp.o
  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/fwd.hpp
  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/geometric.hpp
  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/glm.hpp
+ /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/ext/matrix_clip_space.hpp
+ /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/ext/matrix_projection.hpp
+ /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/ext/matrix_transform.hpp
+ /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/ext/scalar_constants.hpp
+ /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/geometric.hpp
+ /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/mat4x4.hpp
+ /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/matrix.hpp
+ /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/trigonometric.hpp
+ /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/vec2.hpp
+ /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/vec3.hpp
+ /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/vec4.hpp
+ /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/gtc/constants.inl
+ /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/gtc/matrix_transform.hpp
+ /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/gtc/matrix_transform.inl
  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/integer.hpp
  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/mat2x2.hpp
  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/mat2x3.hpp
