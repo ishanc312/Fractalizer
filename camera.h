@@ -6,12 +6,10 @@
 #include <thread>
 #include <mutex>
 
-
 // TO-DO:
-// Do we implement a simple ground? 
-// Figure out translation + turning of the camera
-// Play around with shading methods to produce some cool colors
-// Get the space repetition/folding to work to produce more interesting scenes 
+// TOGGLEABLE ANTI ALIASING!
+// Do we implement a simple ground? Ground would serve as the xz plane (or parallel to the xz plane)
+// Play around with shading methods to produce some cool colors; different "pallettes" and give them fun names 
 // Parallelize the whole process in CUDA 
 // Possibly a simple GUI (CLI, that is) to allow users to configure scenes more easily (rather than hardcoding)
 // Homogenous Coordinates as to represent translation w/ Matrix Multiplication 
@@ -31,7 +29,7 @@ const int IMG_HEIGHT = IMG_WIDTH/ASPECT_RATIO;
 const float V_WIDTH = 2.0;
 const float V_HEIGHT = V_WIDTH/((float)IMG_WIDTH/IMG_HEIGHT);
 
-const int PIXEL_SAMPLES = 10;
+const int PIXEL_SAMPLES = 8;
 const float PIXEL_SCALE = 1.0/PIXEL_SAMPLES;
 
 const int NUM_THREADS = 128;
@@ -39,7 +37,7 @@ const int BLOCK_HEIGHT = IMG_HEIGHT/NUM_THREADS;
 
 class Camera {
 public:
-    Camera(vec3 c_p, float f_l): camera_pos(c_p), focal_length(f_l) {
+    Camera(vec3 c_p, float f_l, bool a_a): camera_pos(c_p), focal_length(f_l), anti_alias(a_a) {
         initializeViewport();
         pixels = new vec3*[IMG_HEIGHT];
         for (int i = 0; i < IMG_HEIGHT; i++) {
@@ -53,6 +51,10 @@ public:
         viewport_u = vec3(V_WIDTH/IMG_WIDTH, 0, 0);
         viewport_v = vec3(0, -V_HEIGHT/IMG_HEIGHT, 0);
         pixels_top_left = viewport_top_left + viewport_u*0.5f + viewport_v*0.5f;
+    }
+
+    void toggleAntiAliasing() {
+        anti_alias = !anti_alias;
     }
 
     // void changeZoom(float zoom_factor) {
@@ -79,27 +81,28 @@ public:
     vec3 rayMarch(vec3 current_pos, const vec3& ray_direction, const std::vector<std::shared_ptr<Hittable>>& scene) {
         std::shared_ptr<Hittable> obj = closestObj(current_pos, scene);
         float dist = obj->SDF(current_pos);
-        while (dist >= LOWER_BOUND && dist <= UPPER_BOUND) {
+        for (int k = 0; k < 50; k++) {
             current_pos = current_pos + ray_direction*dist;
             obj = closestObj(current_pos, scene);
             dist = obj->SDF(current_pos);
+            if (dist < LOWER_BOUND) return obj->getNormal(current_pos);
         }
-        if (dist < LOWER_BOUND) {
-            return obj->getNormal(current_pos);
-        }
-        return vec3(1,1,1);
+        return vec3(255,255,255);
     }
     
     vec3 getColor(float i, float j, const std::vector<std::shared_ptr<Hittable>>& scene) {
         vec3 pixel = pixels_top_left + viewport_u*(float)j + viewport_v*(float)i;
         vec3 ray_direction = (pixel-camera_pos)/distance(camera_pos, pixel);
-        vec3 n_vec = rayMarch(camera_pos, ray_direction, scene);
-        return vec3((int)255.999*(0.5*(n_vec.x+1.0)), 
-            (int)255.999*(0.5*(n_vec.y+1.0)), 
-            (int)255.999*(0.5*(n_vec.z+1.0)));
+        // vec3 n_vec = rayMarch(camera_pos, ray_direction, scene);
+        // return vec3((int)255.999*(0.5*(n_vec.x+1.0)), 
+        //     (int)255.999*(0.5*(n_vec.y+1.0)), 
+        //     (int)255.999*(0.5*(n_vec.z+1.0)));
+        return rayMarch(camera_pos, ray_direction, scene);
     }
 
     vec3 writeColor(int i, int j, const std::vector<std::shared_ptr<Hittable>>& scene) {
+        // This is the core of anti-aliasing...
+        // Either we do this "averaging", random sampling process OR immediately call color 
         vec3 color(0,0,0);
         for (int k = 0; k < PIXEL_SAMPLES; k++) {
             color+=getColor(i+randomFloat(), j+randomFloat(), scene);
@@ -135,6 +138,7 @@ private:
 
     vec3 pixels_top_left;
     vec3** pixels;
+    bool anti_alias;
 };
 
 #endif
