@@ -101,8 +101,6 @@ public:
     }
 
     vec3 writeColor(int i, int j, const std::vector<std::shared_ptr<Hittable>>& scene) {
-        // This is the core of anti-aliasing...
-        // Either we do this "averaging", random sampling process OR immediately call color 
         vec3 color(0,0,0);
         for (int k = 0; k < PIXEL_SAMPLES; k++) {
             color+=getColor(i+randomFloat(), j+randomFloat(), scene);
@@ -110,10 +108,20 @@ public:
         return color*PIXEL_SCALE;
     }
 
-    void renderImage(const std::vector<std::shared_ptr<Hittable>>& scene) {
-        for (int i = 0; i < IMG_HEIGHT; i++) {
-            for (int j = 0; j < IMG_WIDTH; j++) {
-                pixels[i][j] = writeColor(i, j, scene);
+    void renderImage(const std::vector<std::shared_ptr<Hittable>>&  scene) {
+        if (anti_alias) {
+            for (int i = 0; i < IMG_HEIGHT; i++) {
+                for (int j = 0; j < IMG_WIDTH; j++) {
+                    // Take samples to average surrounding colors 
+                    pixels[i][j] = writeColor(i, j, scene);
+                }
+            }
+        } else {
+            for (int i = 0; i < IMG_HEIGHT; i++) {
+                for (int j = 0; j < IMG_WIDTH; j++) {
+                    // Get the color directly
+                    pixels[i][j] = getColor(i, j, scene);
+                }
             }
         }
     }

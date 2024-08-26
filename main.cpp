@@ -5,7 +5,6 @@ using namespace glm;
 
 int main() {
     std::vector<std::shared_ptr<Hittable>> scene = {
-        std::make_shared<fractCube>(vec3(0.5,0.5,0.5), 0.25),
         std::make_shared<Sphere>(vec3(0,0,4), 1)
     };
 
