@@ -705,7 +705,6 @@ CMakeFiles/Fractalizer.dir/main.cpp.o
  /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/string.h
  /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/string_view
  /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/system_error
- /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/thread
  /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/tuple
  /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/type_traits
  /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/typeinfo
@@ -1023,4 +1022,5 @@ CMakeFiles/Fractalizer.dir/main.cpp.o
  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/vec4.hpp
  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/vector_relational.hpp
  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/hittable.h
+ /Users/ishanchitale/Desktop/VSProjects/Fractalizer/pallettes.cpp
 

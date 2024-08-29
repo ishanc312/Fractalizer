@@ -3,17 +3,6 @@
 
 #include <iostream>
 #include <random>
-#include <thread>
-#include <mutex>
-
-// TO-DO:
-// TOGGLEABLE ANTI ALIASING!
-// Do we implement a simple ground? Ground would serve as the xz plane (or parallel to the xz plane)
-// Play around with shading methods to produce some cool colors; different "pallettes" and give them fun names 
-// Parallelize the whole process in CUDA 
-// Possibly a simple GUI (CLI, that is) to allow users to configure scenes more easily (rather than hardcoding)
-// Homogenous Coordinates as to represent translation w/ Matrix Multiplication 
-
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "hittable.h"
@@ -37,7 +26,13 @@ const int BLOCK_HEIGHT = IMG_HEIGHT/NUM_THREADS;
 
 class Camera {
 public:
-    Camera(vec3 c_p, float f_l, bool a_a): camera_pos(c_p), focal_length(f_l), anti_alias(a_a) {
+    Camera(vec3 c_p, float f_l, vec3 (*cP)(float, float), float d, bool a_a): 
+        camera_pos(c_p), 
+        focal_length(f_l), 
+        colorPallette(cP),
+        dampener(d),
+        anti_alias(a_a)
+    {
         initializeViewport();
         pixels = new vec3*[IMG_HEIGHT];
         for (int i = 0; i < IMG_HEIGHT; i++) {
@@ -57,14 +52,6 @@ public:
         anti_alias = !anti_alias;
     }
 
-    // void changeZoom(float zoom_factor) {
-    //     focal_length = focal_length*zoom_factor;
-    // }
-
-    // void translatePosition(const vec3& offset) {
-    //     camera_pos = camera_pos+offset;
-    // }
-
     void turnCamera(float theta, float phi) {
         mat3 rotationH = mat3(rotate(mat4(1.0f), radians(theta), vec3(0.0f, 1.0f, 0.0f)));
         mat3 rotationV = mat3(rotate(mat4(1.0f), radians(phi), rotationH*vec3(-1.0f,0.0f,0.0f)));
@@ -81,22 +68,26 @@ public:
     vec3 rayMarch(vec3 current_pos, const vec3& ray_direction, const std::vector<std::shared_ptr<Hittable>>& scene) {
         std::shared_ptr<Hittable> obj = closestObj(current_pos, scene);
         float dist = obj->SDF(current_pos);
+        float totalDist = 0;
+        // On the first iteration, we make the initial march...
         for (int k = 0; k < 50; k++) {
             current_pos = current_pos + ray_direction*dist;
+            totalDist = totalDist + dist;
+            // Everytime a march is made, update the totalDist travelled
             obj = closestObj(current_pos, scene);
             dist = obj->SDF(current_pos);
-            if (dist < LOWER_BOUND) return obj->getNormal(current_pos);
+            // Recalculate the closest object in this new position and our minimum distance to it 
+            if (dist < LOWER_BOUND || totalDist > UPPER_BOUND) {
+                return colorPallette(totalDist, dampener);
+            }
+            // Break condition 
         }
-        return vec3(255,255,255);
+        return colorPallette(totalDist, dampener);
     }
     
     vec3 getColor(float i, float j, const std::vector<std::shared_ptr<Hittable>>& scene) {
         vec3 pixel = pixels_top_left + viewport_u*(float)j + viewport_v*(float)i;
         vec3 ray_direction = (pixel-camera_pos)/distance(camera_pos, pixel);
-        // vec3 n_vec = rayMarch(camera_pos, ray_direction, scene);
-        // return vec3((int)255.999*(0.5*(n_vec.x+1.0)), 
-        //     (int)255.999*(0.5*(n_vec.y+1.0)), 
-        //     (int)255.999*(0.5*(n_vec.z+1.0)));
         return rayMarch(camera_pos, ray_direction, scene);
     }
 
@@ -147,6 +138,9 @@ private:
     vec3 pixels_top_left;
     vec3** pixels;
     bool anti_alias;
+
+    vec3 (*colorPallette)(float, float);
+    float dampener;
 };
 
 #endif

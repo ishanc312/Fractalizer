@@ -375,7 +375,7 @@ CMakeFiles/Fractalizer.dir/main.cpp.o: \
   /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/vector_relational.hpp \
   /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/integer.hpp \
   /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/detail/func_integer.inl \
-  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/camera.h \
+  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/pallettes.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/iostream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/ios \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__ios/fpos.h \
@@ -947,6 +947,7 @@ CMakeFiles/Fractalizer.dir/main.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/_types/_nl_item.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__bsd_locale_defaults.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/cstdarg \
+  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/camera.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/random \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/bernoulli_distribution.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/uniform_real_distribution.h \
@@ -995,7 +996,6 @@ CMakeFiles/Fractalizer.dir/main.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/seed_seq.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/student_t_distribution.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__random/weibull_distribution.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/thread \
   /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/gtc/matrix_transform.hpp \
   /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/gtc/../mat4x4.hpp \
   /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/gtc/../vec2.hpp \
