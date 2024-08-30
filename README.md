@@ -37,7 +37,7 @@ To execute, run the following in your terminal (at the root directory of the clo
 ```
 mkdir build
 cd build 
-cmake --make ..
+cmake make ..
 cmake --build .
 ./Fractalizer > output.ppm
 ```
