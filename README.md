@@ -13,7 +13,7 @@ Coming Soon...
 </div>
 
 ## Overview ##
-A WIP tool to create cool and interesting fractals! Created utilizing C++, the GLM Library, and CUDA.
+A WIP tool to create cool and interesting fractals! Created utilizing C++ and the GLM Library. 
 
 ## Setup ##
 Clone this repository utilizing `git clone`. Then, in `main.cpp`, add objects here:
