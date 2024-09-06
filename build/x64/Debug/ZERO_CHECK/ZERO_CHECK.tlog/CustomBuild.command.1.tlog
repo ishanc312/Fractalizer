@@ -1,0 +1,10 @@
+^D:\PROJECTS\FRACTALIZER\BUILD\CMAKEFILES\46586E2D8A6BE0E9663F06DAA957A139\GENERATE.STAMP.RULE
+setlocal
+D:\CMake\bin\cmake.exe -SD:/Projects/Fractalizer -BD:/Projects/Fractalizer/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/Projects/Fractalizer/build/Fractalizer.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

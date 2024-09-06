@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\Projects\Fractalizer\build\CMakeFiles\46586e2d8a6be0e9663f06daa957a139\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{882013B0-4EAE-3B34-9E55-57C23F0358CD}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
