@@ -16,7 +16,7 @@ Coming Soon...
 A WIP Ray Marcher to create cool and interesting fractals! Created utilizing C++, CUDA, and the GLM Library. You can view my work on the basic version of this tool, which relies purely on the CPU, in the `main` branch. Meanwhile, you can view the GPU-accelerated version in the `cuda` branch.
 
 ## Render Examples ##
-
+![Purple Haze](renders/purpleHaze.png)
 
 ## Setup (main) ##
 Clone this repository utilizing `git clone -b main https://github.com/ishanc312/Fractalizer.git`. In `main.cpp`, add objects here:
