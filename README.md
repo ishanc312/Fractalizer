@@ -13,7 +13,7 @@ Coming Soon...
 </div>
 
 ## Overview ##
-A WIP tool to create cool and interesting fractals! Created utilizing C++ and the GLM Library. 
+A WIP Ray Marcher to create cool and interesting fractals! Created utilizing C++, CUDA, and the GLM Library. You can view my work on the basic version of this tool, which relies purely on the CPU, in the `main` branch. Meanwhile, you can view the GPU-accelerated version in the `cuda` branch.
 
 ## Setup ##
 Clone this repository utilizing `git clone`. Then, in `main.cpp`, add objects here:
