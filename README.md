@@ -18,7 +18,7 @@ A WIP Ray Marcher to create cool and interesting fractals! Created utilizing C++
 ## Render Examples ##
 
 
-## Setup (main)##
+## Setup (main) ##
 Clone this repository utilizing `git clone -b main https://github.com/ishanc312/Fractalizer.git`. In `main.cpp`, add objects here:
 ```cpp
 std::vector<std::shared_ptr<Hittable>> scene = {
