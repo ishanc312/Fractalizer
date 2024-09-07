@@ -1021,8 +1021,10 @@ CMakeFiles/Fractalizer.dir/main.cpp.o: /Users/ishanchitale/Desktop/VSProjects/Fr
   /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/vec4.hpp \
   /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/vector_relational.hpp \
   /Users/ishanchitale/Desktop/VSProjects/Fractalizer/hittable.h \
-  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/pallettes.cpp
+  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/palettes.h
 
+
+/Users/ishanchitale/Desktop/VSProjects/Fractalizer/palettes.h:
 
 /Users/ishanchitale/Desktop/VSProjects/Fractalizer/hittable.h:
 
@@ -2877,8 +2879,6 @@ CMakeFiles/Fractalizer.dir/main.cpp.o: /Users/ishanchitale/Desktop/VSProjects/Fr
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__type_traits/is_scalar.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__type_traits/common_reference.h:
-
-/Users/ishanchitale/Desktop/VSProjects/Fractalizer/pallettes.cpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__algorithm/ranges_mismatch.h:
 

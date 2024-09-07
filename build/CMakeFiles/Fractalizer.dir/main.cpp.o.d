@@ -375,7 +375,7 @@ CMakeFiles/Fractalizer.dir/main.cpp.o: \
   /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/vector_relational.hpp \
   /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/integer.hpp \
   /Users/ishanchitale/Desktop/VSProjects/Fractalizer/glm/detail/func_integer.inl \
-  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/pallettes.cpp \
+  /Users/ishanchitale/Desktop/VSProjects/Fractalizer/palettes.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/iostream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/ios \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__ios/fpos.h \
