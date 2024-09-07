@@ -13,7 +13,7 @@ Coming Soon...
 </div>
 
 ## Overview ##
-A WIP tool to create cool and interesting fractals! Created utilizing C++, the GLM Library, and CUDA.
+A WIP tool to create cool and interesting fractals! Created utilizing C++ and the GLM Library. 
 
 ## Setup ##
 Clone this repository utilizing `git clone`. Then, in `main.cpp`, add objects here:
@@ -37,7 +37,7 @@ To execute, run the following in your terminal (at the root directory of the clo
 ```
 mkdir build
 cd build 
-cmake --make ..
+cmake make ..
 cmake --build .
 ./Fractalizer > output.ppm
 ```
