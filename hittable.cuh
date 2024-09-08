@@ -18,6 +18,7 @@ private:
     float sphere_radius;
 };
 
+
 // class fractSphere : public Hittable {
 // public:
 //     fractSphere(vec3 c, float r): sphere_center(c), sphere_radius(r) {}

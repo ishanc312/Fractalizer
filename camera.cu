@@ -1,11 +1,9 @@
-#ifndef CAMERA_H
-#define CAMERA_H
-
 #include <iostream>
 #include <random>
 #include "glm/vec3.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "hittable.cuh"
+#include "palettes.cuh"
 using namespace glm;
 
 float ASPECT_RATIO = 16.0/9.0;
@@ -44,17 +42,20 @@ public:
 
 __constant__ Sphere d_sphere;
 __constant__ Camera d_cam;
+__constant__ Palette d_palette;
 
 __device__ vec3 rayMarch(vec3 current_pos, const vec3& ray_direction) {
     float dist = d_sphere.SDF(current_pos);
+    float totalDist = 0;
     for (int k = 0; k < 50; k++) {
         current_pos = current_pos + ray_direction*dist;
+        totalDist = totalDist + dist;
         dist = d_sphere.SDF(current_pos);
-        if (dist < 0.001) {
-            return vec3(255,0,0);
+        if (dist < 0.001 || totalDist > 100) {
+            return d_palette.generateRGB(totalDist);
         }
     }
-    return vec3(0,0,0);
+    return d_palette.generateRGB(totalDist);
 }
 
 __global__ void testRender(vec3* d_pixels, int HEIGHT, int WIDTH) {
@@ -67,9 +68,10 @@ __global__ void testRender(vec3* d_pixels, int HEIGHT, int WIDTH) {
     } 
 }
 
-__host__ vec3* loadScene(const Camera& h_cam, const Sphere& h_sphere) {
+__host__ vec3* loadScene(const Camera& h_cam, const Sphere& h_sphere, const Palette& h_palette) {
     cudaMemcpyToSymbol(d_sphere, &h_sphere, sizeof(Sphere));
     cudaMemcpyToSymbol(d_cam, &h_cam, sizeof(Camera));
+    cudaMemcpyToSymbol(d_palette, &h_palette, sizeof(Palette));
     
     vec3* h_pixels = new vec3[IMG_HEIGHT*IMG_WIDTH];
     vec3* d_pixels;
@@ -97,5 +99,3 @@ __host__ void outputImage(vec3* pixels) {
     }
     std::clog << "Image Creation Complete." << '\n';
 }
-
-#endif
