@@ -6,13 +6,14 @@
  / __/ / _, _/ ___ / /___  / / / ___ |/ /____/ /   / /__/ /___/ _, _/ 
 /_/   /_/ |_/_/  |_\____/ /_/ /_/  |_/_____/___/  /____/_____/_/ |_|  
 --------------------------------------------------------------------------
+A WIP Ray Marcher to create cool and interesting fractals! 
 </pre>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 </div>
 
 ## Overview ##
-A WIP Ray Marcher to create cool and interesting fractals! Created utilizing C++, CUDA, and the GLM Library. You can view my work on the basic version of this tool, which relies purely on the CPU, in the `main` branch. Meanwhile, you can view the GPU-accelerated version in the `cuda` branch.
+Created utilizing C++, CUDA, and the GLM Library. You can view my work on the basic version of this tool, which relies purely on the CPU, in the `main` branch. Meanwhile, you can view the GPU-accelerated version in the `cuda` branch.
 
 ## Render Examples ##
 ![Purple Haze](renders/purpleHaze.png)
