@@ -26,13 +26,13 @@ std::vector<std::shared_ptr<Hittable>> scene = {
     // Objects go here. Refer to hittable.h for object names and constructors. 
 };
 ```
-Create a Palette utilizing four vectors:
+Create a Palette utilizing four vectors and a float called the "dampener", which controls how widely colors will vary.
 ```cpp
-Palette testPalette(vec3(0.5f, 0.5f, 0.5f), vec3(0.5f, 0.5f, 0.5f), vec3(1.0f, 0.7f, 0.4f), vec3(0.0f, 0.15f, 0.20f));
+Palette testPalette(vec3(0.5f, 0.5f, 0.5f), vec3(0.5f, 0.5f, 0.5f), vec3(1.0f, 0.7f, 0.4f), vec3(0.0f, 0.15f, 0.20f), 0.01);
 ```
 Finally, create an instance of the `Camera` object, passing its position, focal length, a color Palette, a scene to render, and a boolean indicating if you want to use anti-aliasing. For example,
 ```cpp
-Camera cam(vec3(0, 0, -4), 1.0, testPalette, 0.03, false);
+Camera cam(vec3(0, 0, -4), 1.0, testPalette, false);
 ```
 Finally, write the following to render the scene:
 ```cpp

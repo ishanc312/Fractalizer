@@ -27,11 +27,10 @@ const int BLOCK_HEIGHT = IMG_HEIGHT/NUM_THREADS;
 
 class Camera {
 public:
-    Camera(vec3 c_p, float f_l, Palette p, float d, bool a_a): 
+    Camera(vec3 c_p, float f_l, Palette p, bool a_a): 
         camera_pos(c_p), 
         focal_length(f_l), 
         colorPalette(p),
-        dampener(d),
         anti_alias(a_a)
     {
         initializeViewport();
@@ -79,11 +78,11 @@ public:
             dist = obj->SDF(current_pos);
             // Recalculate the closest object in this new position and our minimum distance to it 
             if (dist < LOWER_BOUND || totalDist > UPPER_BOUND) {
-                return colorPalette.generateRGB(totalDist, dampener);
+                return colorPalette.generateRGB(totalDist);
             }
             // Break condition 
         }
-        return colorPalette.generateRGB(totalDist, dampener);
+        return colorPalette.generateRGB(totalDist);
     }
     
     vec3 getColor(float i, float j, const std::vector<std::shared_ptr<Hittable>>& scene) {
@@ -141,7 +140,6 @@ private:
     bool anti_alias;
 
     Palette colorPalette;
-    float dampener;
 };
 
 #endif
