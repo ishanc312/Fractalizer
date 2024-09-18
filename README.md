@@ -15,29 +15,7 @@ Coming Soon...
 ## Overview ##
 A WIP tool to create cool and interesting fractals! Created utilizing C++, the GLM Library, and CUDA.
 
-## Setup ##
-Clone this repository utilizing `git clone`. Then, in `main.cpp`, add objects here:
-```cpp
-std::vector<std::shared_ptr<Hittable>> scene = {
-    // std::make_shared<ObjType>()
-    // Objects go here. Refer to hittable.h for object names and constructors. 
-};
-```
-Then, create an instance of the `Camera` object, passing its position, focal length, and if you want to use anti-aliasing. For example, this defines a `Camera` located at (0,0,0), with a focal length of 2.0, and anti-aliasing turned ON when rendering the scene.
-```cpp
-Camera cam(vec3(0,0,0), 2.0, true);
-```
-Finally, write the following to render the scene:
-```cpp
-cam.renderImage(scene);
-cam.outputImage();
-```
-
-To execute, run the following in your terminal (at the root directory of the cloned repository on your machine):
-```
-mkdir build
-cd build 
-cmake --make ..
-cmake --build .
-./Fractalizer > output.ppm
-```
+## Roadblocks & Roadmap ##
+- Rendering Scenes: I was able to successfully render a single object by launching a CUDA Kernel where each pixel is processed by a thread. However, when it comes to rendering a scene of objects, I cannot create a vector of `Hittable` shared pointers like the `main` branch of this project (CPU-Based), since CUDA does not support polymorphism, nor features of the standard library such as vectors or smart pointers. Thus, I am looking for a workaround to this issue.
+- Anti-Aliasing: Anti-aliasing can pretty easily be implemented by having each thread run through a for loop to perform the random sampling process. However, another idea I had was to utilize "Dynamic Parallelism" to have each thread launch another kernel, with just 1 block of 10 threads. This new kernel can then compute the average of the random sampling process, letting the average be shared memory across the block that each thread can contribute to, being mindful of race conditions. However, implementing this method of anti-aliasing is subject to hardware limitations; the sheer number of kernels being launched and threads would result in the queuing of resources, likely slowing down our program greatly.
+- I would like to implement popular optimization techniques, such as Bounding Volume Hierarchies (BVH), Spatial Partioning, and Denoisers.
